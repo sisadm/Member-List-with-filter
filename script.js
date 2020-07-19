@@ -1,5 +1,5 @@
 
-let li = document.querySelectorAll('.student-list li');
+let allStudentList = document.querySelectorAll('.student-list li');
 let numberOfList= 10;
 
 
@@ -70,7 +70,7 @@ function appedPageLinks(list) {
          let targetInner = e.target;
          targetInner.classList.add("active");
          targetInner = targetInner.innerHTML;
-         showPage(li, targetInner);
+         showPage(list, targetInner);
       }
    });
 }
@@ -94,7 +94,7 @@ function noResult(list) {
        pNoResults.textContent = 'Sorry we dont have Match to this Name.';
        let noResult = document.querySelector(".result");
        if(!noResult) {
-         li[0].parentNode.appendChild(pNoResults);
+         allStudentList[0].parentNode.appendChild(pNoResults);
        } 
    }
 }
@@ -139,24 +139,22 @@ function addSearchBar() {
    }
    searchInput.addEventListener("keyup", () => {
       let value = searchInput.value.toLowerCase();
-      let newLi = [];
+      let newListOfStudent = [];
       if(value == "") {
          removePagination();
-         callFunction(li, 1);
+         callFunction(allStudentList, 1);
          deleteResult();
       } else {
          for(let i = 0; i < h3Array.length; i++) {
-            li[i].style.display = "none";
+            allStudentList[i].style.display = "none";
             if(h3Array[i].indexOf(value) !== -1) {
-               li[i].style.display = "";
-               newLi.push(li[i]);
+               allStudentList[i].style.display = "";
+               newListOfStudent.push(allStudentList[i]);
             }
          }
-         newLiLength = newLi.length / 10;      
-         console.log(newLiLength);
-         console.log(newLi);
+         newLiLength = newListOfStudent.length / 10;      
          removePagination();
-         callFunction(newLi, newLiLength);
+         callFunction(newListOfStudent, newLiLength);
       }
       
    });
@@ -168,7 +166,7 @@ function addSearchBar() {
 // call the functions.
 
 addSearchBar();
-callFunction(li, 1);
+callFunction(allStudentList, 1);
 
 
 
